@@ -2,6 +2,7 @@ import React, { useDebugValue, useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import "./Auth.css";
 import validator from "validator";
+import { signup, signin } from "../axios/axios";
 
 export default function (props) {
     let [authMode, setAuthMode] = useState("signin");
@@ -58,6 +59,11 @@ export default function (props) {
         if (errorMessage == "No Error") {
             //write signin logic here
             console.log(userDetails);
+            const signInUser = async () => {
+                const res = await signin(userDetails);
+                console.log("here" + res);
+            };
+            signInUser();
         }
     };
 
@@ -93,6 +99,11 @@ export default function (props) {
         if (errorMessage == "No Error") {
             //write signup logic here
             console.log(userDetails);
+            const signUpUser = async () => {
+                const res = await signup(userDetails);
+                console.log("here" + res);
+            };
+            signUpUser();
         }
     };
 
