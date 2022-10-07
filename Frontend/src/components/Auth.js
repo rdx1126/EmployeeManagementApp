@@ -1,16 +1,17 @@
 import React, { useDebugValue, useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import "./Auth.css";
+import validator from "validator";
 
 export default function (props) {
     let [authMode, setAuthMode] = useState("signin");
     let [errorMessage, setErrorMessage] = useState("No Error");
     let [passwordStatus, setPasswordStatus] = useState("NA");
     let initailUserDetails = {
-        userName: "",
-        userEmail: "",
-        userPassword: "",
-        userType: "Admin",
+        name: "",
+        email: "",
+        password: "",
+        role: "admin",
     };
 
     const [userDetails, setUserDetails] = useState(initailUserDetails);
@@ -24,34 +25,33 @@ export default function (props) {
 
     const handleNameChange = (event) => {
         if (event.target.value.length > 0) setErrorMessage("No Error");
-        setUserDetails({ ...userDetails, userName: event.target.value });
+        setUserDetails({ ...userDetails, name: event.target.value });
     };
     const handleEmailChange = (event) => {
         if (event.target.value.length > 0) {
             setErrorMessage("No Error");
             setPasswordStatus("NA");
         }
-        setUserDetails({ ...userDetails, userEmail: event.target.value });
+        setUserDetails({ ...userDetails, email: event.target.value });
     };
     const handlePasswordChange = (event) => {
         if (event.target.value.length > 0) setErrorMessage("No Error");
-        setUserDetails({ ...userDetails, userPassword: event.target.value });
+        setUserDetails({ ...userDetails, password: event.target.value });
     };
-    const setUserType = (event) => {
-        setUserDetails({ ...userDetails, userType: event.target.value });
+    const setRole = (event) => {
+        setUserDetails({ ...userDetails, role: event.target.value });
     };
 
     const signInUser = () => {
-        if (userDetails.userEmail.length == 0) {
+        if (userDetails.email.length == 0) {
             setErrorMessage("Email address can't be empty");
+        } else if (!validator.isEmail(userDetails.email)) {
+            setErrorMessage("Please enter valid e-mail address.");
         }
-        if (userDetails.userPassword.length == 0) {
+        if (userDetails.password.length == 0) {
             setErrorMessage("Password can't be empty");
         }
-        if (
-            userDetails.userPassword.length == 0 &&
-            userDetails.userEmail.length == 0
-        ) {
+        if (userDetails.password.length == 0 && userDetails.email.length == 0) {
             setErrorMessage("Email address and Password can't be empty");
         }
 
@@ -63,25 +63,29 @@ export default function (props) {
 
     const signUpUser = () => {
         console.log(userDetails);
-        if (userDetails.userName.length == 0) {
+        if (userDetails.name.length == 0) {
             setErrorMessage("Full Name can't be empty");
         }
-        if (userDetails.userEmail.length == 0) {
+        if (userDetails.email.length == 0) {
             setErrorMessage("Email address can't be empty");
+        } else if (!validator.isEmail(userDetails.email)) {
+            setErrorMessage("Please enter valid e-mail address.");
         }
-        if (userDetails.userPassword.length == 0) {
+        if (userDetails.password.length == 0) {
             setErrorMessage("Password can't be empty");
+        } else if (userDetails.password.length < 8) {
+            setErrorMessage("Password Length can't be less than 8 characters");
         }
+
         if (
-            (userDetails.userName.length == 0 &&
-                userDetails.userPassword.length == 0) ||
-            (userDetails.userName.length == 0 &&
-                userDetails.userEmail.length == 0) ||
-            (userDetails.userPassword.length == 0 &&
-                userDetails.userEmail.length == 0) ||
-            (userDetails.userName.length == 0 &&
-                userDetails.userPassword.length == 0 &&
-                userDetails.userEmail.length == 0)
+            (userDetails.name.length == 0 &&
+                userDetails.password.length == 0) ||
+            (userDetails.name.length == 0 && userDetails.email.length == 0) ||
+            (userDetails.password.length == 0 &&
+                userDetails.email.length == 0) ||
+            (userDetails.name.length == 0 &&
+                userDetails.password.length == 0 &&
+                userDetails.email.length == 0)
         ) {
             setErrorMessage("Fileds can't be empty");
         }
@@ -94,14 +98,14 @@ export default function (props) {
 
     const forgotPassword = () => {
         console.log("Forgot Password");
-        if (userDetails.userEmail.length == 0)
+        if (userDetails.email.length == 0)
             setErrorMessage(
                 "Please enter your email address. We'll send you a link to reset your password"
             );
         else
             setPasswordStatus(
                 "We have e-mailed your password reset link to " +
-                    userDetails.userEmail
+                    userDetails.email
             );
     };
 
@@ -173,7 +177,7 @@ export default function (props) {
                                 <label>Email address</label>
                                 <input
                                     type="email"
-                                    value={userDetails.userEmail}
+                                    value={userDetails.email}
                                     className="form-control mt-1"
                                     placeholder="Enter email"
                                     onChange={handleEmailChange}
@@ -183,7 +187,7 @@ export default function (props) {
                                 <label>Password</label>
                                 <input
                                     type="password"
-                                    value={userDetails.userPassword}
+                                    value={userDetails.password}
                                     className="form-control mt-1"
                                     placeholder="Enter password"
                                     onChange={handlePasswordChange}
@@ -256,7 +260,7 @@ export default function (props) {
                             <label>Full Name</label>
                             <input
                                 type="text"
-                                value={userDetails.userName}
+                                value={userDetails.name}
                                 className="form-control mt-1"
                                 placeholder="Full Name"
                                 onChange={handleNameChange}
@@ -266,7 +270,7 @@ export default function (props) {
                             <label>Email address</label>
                             <input
                                 type="email"
-                                value={userDetails.userEmail}
+                                value={userDetails.email}
                                 className="form-control mt-1"
                                 placeholder="Email Address"
                                 onChange={handleEmailChange}
@@ -275,17 +279,17 @@ export default function (props) {
                         <div className="form-group mt-3">
                             <label>Password</label>
                             <input
-                                value={userDetails.userPassword}
+                                value={userDetails.password}
                                 type="password"
                                 className="form-control mt-1"
                                 placeholder="Password"
                                 onChange={handlePasswordChange}
                             />
                         </div>
-                        <div className="form-group mt-3" onChange={setUserType}>
+                        <div className="form-group mt-3" onChange={setRole}>
                             <input
                                 type="radio"
-                                value="Admin"
+                                value="admin"
                                 name="user"
                                 defaultChecked
                             />{" "}
@@ -293,7 +297,7 @@ export default function (props) {
                             <span style={{ paddingLeft: "15px" }}>
                                 <input
                                     type="radio"
-                                    value="Employee"
+                                    value="employee"
                                     name="user"
                                 />{" "}
                                 Employee
