@@ -4,7 +4,7 @@ import "./Auth.css";
 import validator from "validator";
 import { signup, signin } from "../axios/axios";
 
-export default function (props) {
+export default function ({ setUser }) {
     let [authMode, setAuthMode] = useState("signin");
     let [errorMessage, setErrorMessage] = useState("No Error");
     let [passwordStatus, setPasswordStatus] = useState("NA");
@@ -62,6 +62,7 @@ export default function (props) {
             const signInUser = async () => {
                 const res = await signin(userDetails);
                 console.log("here" + res);
+                setUser(res);
             };
             signInUser();
         }
@@ -93,7 +94,7 @@ export default function (props) {
                 userDetails.password.length == 0 &&
                 userDetails.email.length == 0)
         ) {
-            setErrorMessage("Fileds can't be empty");
+            setErrorMessage("Fields can't be empty");
         }
 
         if (errorMessage == "No Error") {
@@ -102,6 +103,7 @@ export default function (props) {
             const signUpUser = async () => {
                 const res = await signup(userDetails);
                 console.log("here" + res);
+                setUser(res);
             };
             signUpUser();
         }
