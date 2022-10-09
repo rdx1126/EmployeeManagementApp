@@ -11,7 +11,7 @@ app.use(express.json());
 
 // * Available Routes.
 app.use("/api/auth", require("./routes/auth"));
-// app.use("/api/project", require("./routes/project"));
+app.use("/api/task", require("./routes/task"));
 
 app.listen(port, () => {
     console.log(
