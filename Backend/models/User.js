@@ -17,7 +17,24 @@ const UserSchema = new Schema({
     role: {
         type: String,
         required: true,
+        default: "admin",
         enum: ["admin", "employee"],
+    },
+    deactivated: {
+        type: Boolean,
+        default: false,
+    },
+    contactNumber: {
+        type: Number,
+        default: 0,
+    },
+    joiningDate: {
+        type: Date,
+        default: Date.now,
+    },
+    department: {
+        type: String,
+        default: "",
     },
 });
 

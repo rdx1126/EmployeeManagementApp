@@ -1,18 +1,24 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import "./Auth.css";
 import validator from "validator";
-import { signup, signin } from "../axios/axios";
+import { signup, signin } from "../../axios/axios";
+import Home from "../Home";
+import axios from "axios";
 
 export default function ({ setUser }) {
     let [authMode, setAuthMode] = useState("signin");
     let [errorMessage, setErrorMessage] = useState("No Error");
     let [passwordStatus, setPasswordStatus] = useState("NA");
     let initailUserDetails = {
-        name: "",
         email: "",
+        name: "",
         password: "",
         role: "admin",
+        deactivated: false,
+        contactNumber: 0,
+        joiningDate: Date.now,
+        department: "",
     };
 
     const [userDetails, setUserDetails] = useState(initailUserDetails);
@@ -39,9 +45,6 @@ export default function ({ setUser }) {
         if (event.target.value.length > 0) setErrorMessage("No Error");
         setUserDetails({ ...userDetails, password: event.target.value });
     };
-    const setRole = (event) => {
-        setUserDetails({ ...userDetails, role: event.target.value });
-    };
 
     const signInUser = () => {
         if (userDetails.email.length == 0) {
@@ -57,12 +60,11 @@ export default function ({ setUser }) {
         }
 
         if (errorMessage == "No Error") {
-            //write signin logic here
-            console.log(userDetails);
+            // console.log(userDetails);
             const signInUser = async () => {
-                const res = await signin(userDetails);
-                console.log("here" + res);
-                setUser(res);
+                const response = await signin(userDetails);
+                setUser(response.data);
+                console.log(response.data);
             };
             signInUser();
         }
@@ -299,23 +301,7 @@ export default function ({ setUser }) {
                                 onChange={handlePasswordChange}
                             />
                         </div>
-                        <div className="form-group mt-3" onChange={setRole}>
-                            <input
-                                type="radio"
-                                value="admin"
-                                name="user"
-                                defaultChecked
-                            />{" "}
-                            Admin
-                            <span style={{ paddingLeft: "15px" }}>
-                                <input
-                                    type="radio"
-                                    value="employee"
-                                    name="user"
-                                />{" "}
-                                Employee
-                            </span>
-                        </div>
+
                         <div className="d-grid gap-2 mt-3">
                             <button
                                 className="btn btn-primary"
