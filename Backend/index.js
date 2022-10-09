@@ -12,6 +12,7 @@ app.use(express.json());
 // * Available Routes.
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/task", require("./routes/task"));
+app.use("/api/employee", require("./routes/employee"));
 
 app.listen(port, () => {
     console.log(
