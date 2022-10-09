@@ -1,33 +1,53 @@
 import React, { useState } from "react";
 import "./AddTask.css";
+import axios from "axios";
 
 function AddTask({ setAddOpen }) {
-    const [taskType, setTaskType] = useState("Work");
-    const [startTime, setStartTime] = useState("00:00");
-    const [timeTaken, setTimeTaken] = useState(0);
-    const [taskDescription, setTaskDescription] = useState("");
+    const [taskDetails, setTaskDetails] = useState({
+        taskType: "Meeting",
+        startTime: "00:00",
+        timeTaken: 0,
+        description: "",
+    });
 
     const handleTaskType = (e) => {
-        setTaskType(e.target.value);
+        setTaskDetails({ ...taskDetails, taskType: e.target.value });
     };
     const handleStartTime = (e) => {
-        setStartTime(e.target.value);
+        setTaskDetails({ ...taskDetails, startTime: e.target.value });
     };
     const handleTimeTaken = (e) => {
-        setTimeTaken(e.target.value);
+        setTaskDetails({ ...taskDetails, timeTaken: e.target.value });
     };
     const handleTaskDescription = (e) => {
-        setTaskDescription(e.target.value);
+        setTaskDetails({ ...taskDetails, description: e.target.value });
     };
     const handleCancel = () => {
         setAddOpen(false);
     };
     const handleAddTask = () => {
-        setAddOpen(false);
-        console.log(taskType);
-        console.log(startTime);
-        console.log(timeTaken);
-        console.log(taskDescription);
+        const addEmployee = async () => {
+            let baseURL = "http://localhost:5000/api/task/";
+            await axios({
+                url: `${baseURL}addtask`,
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token":
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM0MmE5NjhmMWEzMDUyNDMxMzI0Zjg5Iiwicm9sZSI6ImVtcGxveWVlIn0sImlhdCI6MTY2NTMzNjUxMH0.prY-IIM7A9nKuBHbcAV4ZL_gJ_Mt4ZCJY3uaGKA82Fw",
+                },
+                data: taskDetails,
+            })
+                .then((data) => {
+                    setAddOpen(false);
+                    console.log(data.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setAddOpen(false);
+                });
+        };
+        addEmployee();
     };
 
     return (
@@ -38,7 +58,7 @@ function AddTask({ setAddOpen }) {
                         Task-Type
                     </label>
                     <select
-                        value={taskType}
+                        value={taskDetails.taskType}
                         onChange={handleTaskType}
                         name="task_type"
                         style={{ width: "50%" }}
@@ -65,7 +85,7 @@ function AddTask({ setAddOpen }) {
                         className="form__input"
                         placeholder="StartTime"
                         onChange={handleStartTime}
-                        value={startTime}
+                        value={taskDetails.startTime}
                     />
                 </div>
                 <div className="TimeTaken">
@@ -85,7 +105,7 @@ function AddTask({ setAddOpen }) {
                         className="form__input"
                         placeholder="TimeTaken"
                         onChange={handleTimeTaken}
-                        value={timeTaken}
+                        value={taskDetails.timeTaken}
                     />
                 </div>
 
@@ -102,7 +122,7 @@ function AddTask({ setAddOpen }) {
                         rows="5"
                         cols="60"
                         onChange={handleTaskDescription}
-                        value={taskDescription}
+                        value={taskDetails.description}
                     ></textarea>
                 </div>
             </div>

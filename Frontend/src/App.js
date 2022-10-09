@@ -17,7 +17,7 @@ function App() {
     const [user, setUser] = useState(initalValue);
 
     useEffect(() => {
-        // console.log(JSON.parse(localStorage.getItem("data")));
+        console.log(localStorage.getItem("data"));
         if (
             localStorage.getItem("data") &&
             JSON.parse(localStorage.getItem("data")).authToken
