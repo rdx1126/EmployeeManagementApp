@@ -7,7 +7,7 @@ function AddTask() {
             <div className="form-body">
                 <div className="TaskType">
                     <label for="Task-Type" style={{width:'12vw'}}>Task-Type</label>
-                    <select name="dog-names" style={{width:'15vw'}} id="dog-names">
+                    <select name="taskType" style={{width:'15vw'}} id="Task-Type">
                         <option value="Break">Break</option>
                         <option value="Meeting">Meeting</option>
                         <option value="Work">Work</option>
@@ -20,7 +20,7 @@ function AddTask() {
                     <input
                         style={{ width: "15vw" }}
                         type="Time"
-                        name="StartTime"
+                        name="startTime"
                         id="StartTime"
                         className="form__input"
                         placeholder="StartTime"
@@ -33,7 +33,7 @@ function AddTask() {
                     <input
                         style={{ width: "15vw" }}
                         type="Number"
-                        name="TimeTaken"
+                        name="timeTaken"
                         id="TimeTaken"
                         className="form__input"
                         placeholder="TimeTaken"
@@ -47,8 +47,8 @@ function AddTask() {
                     </label>
 
                     <textarea
-                        id="w3review"
-                        name="w3review"
+                        id="description"
+                        name="description"
                         rows="5"
                         cols="60"
                     ></textarea>
