@@ -21,7 +21,7 @@ function App() {
             "data",
             JSON.stringify({
                 success: true,
-                role: "employee",
+                role: "admin",
                 authToken:
                     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM0MWM5ZjkxODAxZDkwNTcxNGQ3NmY1In0sImlhdCI6MTY2NTI2NDM0Nn0.uzaIySsX4_wlcH2wcEU1aIG1WE7Uw6Ch82UTZoMzFo4",
             })
@@ -35,7 +35,7 @@ function App() {
 
     return (
         <>
-            {user.role == "no" ? <NavBar /> : <span />}
+            {/* {user.role == "no" ? <NavBar /> : <span />}*/}
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
