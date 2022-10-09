@@ -13,3 +13,5 @@ We have divided it into 2 parts
 -> "npm start" to start frontend.
 
 -> "npm run backend" to run backend.
+
+## App Overview
