@@ -12,7 +12,7 @@ const columns = [
         width: 150,
         editable: false,
     },
-  
+
     {
         field: "Department",
         headerName: "Department",
@@ -22,15 +22,15 @@ const columns = [
 ];
 
 const rows = [
-    { id: 1, EmployeeName: "Snow Jon",Department:"Autonomous" },
-    { id: 2, EmployeeName: "Lannister Cersei",Department:"ML" },
-    { id: 3, EmployeeName: "Lannister Jaime",Department:"Autonomous"},
-    { id: 4, EmployeeName: "StarkArya",Department:"SLIM FAST" },
-    { id: 5, EmployeeName: "Targaryen Daenerys",Department:"L&D"},
-    { id: 6, EmployeeName: "Melisandre null",Department:"G4 ANALYTICS"},
-    { id: 7, EmployeeName: "Clifford Ferrara",Department:"Autonomous"  },
-    { id: 8, EmployeeName: "Frances Rossini",Department:"CFOTECH"  },
-    { id: 9, EmployeeName: "Roxie Harvey",Department:"CFOTECH"  },
+    { id: 1, EmployeeName: "Snow Jon", Department: "Autonomous" },
+    { id: 2, EmployeeName: "Lannister Cersei", Department: "ML" },
+    { id: 3, EmployeeName: "Lannister Jaime", Department: "Autonomous" },
+    { id: 4, EmployeeName: "StarkArya", Department: "SLIM FAST" },
+    { id: 5, EmployeeName: "Targaryen Daenerys", Department: "L&D" },
+    { id: 6, EmployeeName: "Melisandre null", Department: "G4 ANALYTICS" },
+    { id: 7, EmployeeName: "Clifford Ferrara", Department: "Autonomous" },
+    { id: 8, EmployeeName: "Frances Rossini", Department: "CFOTECH" },
+    { id: 9, EmployeeName: "Roxie Harvey", Department: "CFOTECH" },
 ];
 
 export default function AdminDashboard() {
@@ -44,29 +44,35 @@ export default function AdminDashboard() {
                 setAddOpen={setAddOpen}
             />
 
-            {isAddOpen ? <AddEmployee /> : <span></span>}
-
-            <Box sx={{ margin:'9vh auto',height: 1000, width: "85%"  ,}}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[10]}
-                    SelectionOnClick
-                    // experimentalFeatures={{ newEditingApi: true }}
-                />
-            </Box>
+            {isAddOpen ? (
+                <AddEmployee setAddOpen={setAddOpen} />
+            ) : (
+                <Box
+                    sx={{
+                        margin: "10vh auto",
+                        height: 400,
+                        width: "85%",
+                    }}
+                >
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={5}
+                        rowsPerPageOptions={[10]}
+                        SelectionOnClick
+                    />
+                </Box>
+            )}
         </>
     );
 }
 
-    // {
-    //     field: "Employee Name",
-    //     headerName: "Employee name",
-    //     description: "This column has a value getter and is not sortable.",
-    //     sortable: false,
-    //     width: 160,
-    //     // valueGetter: (params) =>
-    //     //     `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    // },
-    
+// {
+//     field: "Employee Name",
+//     headerName: "Employee name",
+//     description: "This column has a value getter and is not sortable.",
+//     sortable: false,
+//     width: 160,
+//     // valueGetter: (params) =>
+//     //     `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+// },

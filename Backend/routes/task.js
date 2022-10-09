@@ -42,11 +42,10 @@ router.post(
                 user: req.user.id,
             });
 
-            const savedTask = await task.save();
+            await task.save();
             return res.json({
                 success: true,
                 message: "Task Added Successfully",
-                task: savedTask,
             });
         } catch (error) {
             console.error(error.message);

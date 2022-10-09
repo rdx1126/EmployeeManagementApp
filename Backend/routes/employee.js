@@ -38,15 +38,10 @@ router.put("/deactivate", fetchUser, async (req, res) => {
             email: req.body.email,
         });
 
-        const data = await User.findByIdAndUpdate(
-            _id,
-            { deactivated: !deactivated },
-            { new: true }
-        );
+        await User.findByIdAndUpdate(_id, { deactivated: !deactivated });
         return res.json({
             success: true,
             message: !deactivated ? "Account deactivated" : "Account activated",
-            data: data,
         });
     } catch (error) {
         console.error(error.message);

@@ -6,7 +6,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 
-
 export default function EmployeeDashboard() {
     const [isAddOpen, setAddOpen] = useState(false);
 
@@ -35,8 +34,7 @@ export default function EmployeeDashboard() {
                         marginTop: "15.5vh",
                     }}
                 >
-                    <CardContent>
-                    </CardContent>
+                    <CardContent></CardContent>
                     <CardActions></CardActions>
                 </Card>
                 <Card

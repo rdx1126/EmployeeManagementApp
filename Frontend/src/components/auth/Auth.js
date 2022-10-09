@@ -60,11 +60,22 @@ export default function ({ setUser }) {
         }
 
         if (errorMessage == "No Error") {
-            // console.log(userDetails);
             const signInUser = async () => {
-                const response = await signin(userDetails);
-                setUser(response.data);
-                console.log(response.data);
+                let baseURL = "http://localhost:5000/api/auth/";
+                await axios({
+                    url: `${baseURL}signin`,
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: userDetails,
+                })
+                    .then((data) => {
+                        console.log(data.data);
+                        setUser(data.data);
+                        localStorage.setItem("data", JSON.stringify(data.data));
+                    })
+                    .catch((error) => console.log(error));
             };
             signInUser();
         }
@@ -100,12 +111,22 @@ export default function ({ setUser }) {
         }
 
         if (errorMessage == "No Error") {
-            //write signup logic here
-            console.log(userDetails);
             const signUpUser = async () => {
-                const res = await signup(userDetails);
-                console.log("here" + res);
-                setUser(res);
+                let baseURL = "http://localhost:5000/api/auth/";
+                await axios({
+                    url: `${baseURL}signup`,
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: userDetails,
+                })
+                    .then((data) => {
+                        console.log(data.data);
+                        setUser(data.data);
+                        localStorage.setItem("data", JSON.stringify(data.data));
+                    })
+                    .catch((error) => console.log(error));
             };
             signUpUser();
         }
