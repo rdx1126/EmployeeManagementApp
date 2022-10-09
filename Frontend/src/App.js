@@ -21,7 +21,7 @@ function App() {
             "data",
             JSON.stringify({
                 success: true,
-                role: "admin",
+                role: "employee",
                 authToken:
                     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM0MWM5ZjkxODAxZDkwNTcxNGQ3NmY1In0sImlhdCI6MTY2NTI2NDM0Nn0.uzaIySsX4_wlcH2wcEU1aIG1WE7Uw6Ch82UTZoMzFo4",
             })
