@@ -21,7 +21,6 @@ const TaskState = (props) => {
             .catch((error) => {
                 console.log(error);
             });
-        console.log(task);
     };
     return (
         <TaskContext.Provider value={{ task, getTasks }}>
