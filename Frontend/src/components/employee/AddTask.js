@@ -9,6 +9,21 @@ function AddTask({ setAddOpen }) {
         timeTaken: 0,
         description: "",
     });
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = "0" + dd;
+    }
+
+    if (mm < 10) {
+        mm = "0" + mm;
+    }
+
+    today = yyyy + "-" + mm + "-" + dd;
+    var minDate = "1993-05-25";
 
     const handleTaskType = (e) => {
         setTaskDetails({ ...taskDetails, taskType: e.target.value });
@@ -68,6 +83,22 @@ function AddTask({ setAddOpen }) {
                         <option value="Meeting">Meeting</option>
                         <option value="Work">Work</option>
                     </select>
+                </div>
+                <div className="StartingDate">
+                    <label
+                        className="form__label"
+                        for="StartingDate"
+                        style={{ width: "40%" }}
+                    >
+                        Starting Date{" "}
+                    </label>
+                    <input
+                        style={{ width: "50%", height: "10%" }}
+                        type="date"
+                        name="DOB"
+                        min={minDate}
+                        max={today}
+                    />
                 </div>
                 <div className="StartTime">
                     <label
