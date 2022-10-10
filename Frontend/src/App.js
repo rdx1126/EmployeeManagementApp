@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./components/auth/Auth";
 import Home from "./components/Home";
+import { PieChart } from "./components/graphs/PieChart";
 
 function App() {
     return (

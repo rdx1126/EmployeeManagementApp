@@ -1,14 +1,23 @@
 import { margin } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import AddEmployee from "./AddEmployee";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Graphs from "../graphs/Graphs";
 
 export default function AdminDashboard() {
     const [deactivated, setDeactivated] = useState(false);
+    const [showGraph, setShowGraph] = useState(false);
 
+    const handleButtonClick = (params) => {
+        console.log(params);
+    };
+    const handleGraphButtonClick = (params) => {
+        console.log(params);
+        setShowGraph(true);
+    };
     const columns = [
         { field: "id", headerName: "ID", width: 90, flex: 1 },
         {
@@ -26,6 +35,26 @@ export default function AdminDashboard() {
             editable: true,
             flex: 1,
         },
+
+        {
+            field: "Graph",
+            headerName: "Employee Details",
+            width: 90,
+            flex: 1,
+            renderCell: (params) => {
+                return (
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            handleGraphButtonClick(params.row);
+                        }}
+                    >
+                        View
+                    </Button>
+                );
+            },
+        },
+
         {
             field: "Deactivate",
             headerName: "Deactivate",
@@ -36,6 +65,9 @@ export default function AdminDashboard() {
                     <Button
                         variant="contained"
                         color={deactivated ? "error" : "success"}
+                        onClick={() => {
+                            handleButtonClick(params.row);
+                        }}
                     >
                         {deactivated ? "Activate" : "Deactivate"}
                     </Button>
@@ -75,6 +107,8 @@ export default function AdminDashboard() {
 
             {isAddOpen ? (
                 <AddEmployee setAddOpen={setAddOpen} />
+            ) : showGraph ? (
+                <Graphs setShowGraph={setShowGraph} showGraph={showGraph} />
             ) : (
                 <Box
                     style={{
@@ -106,13 +140,3 @@ export default function AdminDashboard() {
         </>
     );
 }
-
-// {
-//     field: "Employee Name",
-//     headerName: "Employee name",
-//     description: "This column has a value getter and is not sortable.",
-//     sortable: false,
-//     width: 160,
-//     // valueGetter: (params) =>
-//     //     `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-// },
