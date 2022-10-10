@@ -9,7 +9,7 @@ const fetchUser = require("../middleware/fetchUser");
 const User = require("../models/User");
 const JWT_SECRET = process.env.JWT_SECRET_MESSAGE;
 
-// * Route 1: For Signning up a new user
+// * ROUTE 1: For Signning up a new user
 // * Using: /api/auth/signup
 router.post(
     "/signup",
@@ -50,6 +50,7 @@ router.post(
             const data = {
                 user: {
                     id: user.id,
+                    role: user.role,
                 },
             };
             const authToken = jwt.sign(data, JWT_SECRET);
@@ -66,7 +67,7 @@ router.post(
     }
 );
 
-// * Route 2: For Signning in a user
+// * ROUTE 2: For Signning in a user
 // * Using: /api/auth/signin
 router.post(
     "/signin",
@@ -110,6 +111,7 @@ router.post(
             const data = {
                 user: {
                     id: user.id,
+                    role: user.role,
                 },
             };
             const authToken = jwt.sign(data, JWT_SECRET);
@@ -164,7 +166,7 @@ router.post(
 
         try {
             // * Check whether the user adding the employee is admin or not
-            const { role } = await User.findById(req.user.id);
+            const { role } = req.user;
             if (role !== "admin")
                 return res
                     .status(403)

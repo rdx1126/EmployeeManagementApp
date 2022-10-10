@@ -15,8 +15,8 @@ export const getUserInfo = (token) => {
         .catch((error) => console.log(error));
 };
 
-export const signin = async (payload) => {
-    return await axios({
+export const signin = (payload) => {
+    axios({
         url: `${baseURL}signin`,
         method: "POST",
         headers: {
@@ -25,6 +25,8 @@ export const signin = async (payload) => {
         data: payload,
     })
         .then((data) => {
+            console.log(data.data);
+            return data.data;
             localStorage.setItem("data", JSON.stringify(data.data));
         })
         .catch((error) => console.log(error));
