@@ -11,6 +11,10 @@ const Task = new Schema({
         required: true,
         enum: ["Break", "Meeting", "Work"],
     },
+    startDate: {
+        type: Date,
+        required: true,
+    },
     startTime: {
         type: String,
         required: true,

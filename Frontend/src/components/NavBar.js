@@ -4,11 +4,18 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar(props) {
     const handleAddButtonClick = () => {
         console.log(props.role);
         props.setAddOpen(true);
+    };
+
+    let navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("data");
+        navigate("/auth");
     };
 
     return (
@@ -58,6 +65,7 @@ export default function NavBar(props) {
                                 color: "white",
 
                             }}
+                            onClick={handleLogout}
                         >
                             LOGOUT
                         </Button>

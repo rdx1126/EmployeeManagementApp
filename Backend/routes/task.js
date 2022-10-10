@@ -12,6 +12,7 @@ router.post(
     fetchUser,
     [
         body("taskType", "taskType field empty").exists(),
+        body("startDate", "startDate field empty").exists(),
         body("startTime", "startTime field empty").exists(),
         body("timeTaken", "timeTaken field empty").exists(),
         body("description", "description field empty").exists(),
@@ -32,10 +33,12 @@ router.post(
                     error: "Action cannot be performed",
                 });
 
-            const { taskType, startTime, timeTaken, description } = req.body;
+            const { taskType, startDate, startTime, timeTaken, description } =
+                req.body;
 
             const task = new Task({
                 taskType,
+                startDate,
                 startTime,
                 timeTaken,
                 description,

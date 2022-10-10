@@ -1,12 +1,13 @@
-import React, { useDebugValue, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import "./Auth.css";
 import validator from "validator";
-import { signup, signin } from "../../axios/axios";
-import Home from "../Home";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function ({ setUser }) {
+export default function () {
+    let navigate = useNavigate();
+
     let [authMode, setAuthMode] = useState("signin");
     let [errorMessage, setErrorMessage] = useState("No Error");
     let [passwordStatus, setPasswordStatus] = useState("NA");
@@ -46,7 +47,7 @@ export default function ({ setUser }) {
         setUserDetails({ ...userDetails, password: event.target.value });
     };
 
-    const signInUser = () => {
+    const signInUser = async () => {
         if (userDetails.email.length == 0) {
             setErrorMessage("Email address can't be empty");
         } else if (!validator.isEmail(userDetails.email)) {
@@ -70,10 +71,15 @@ export default function ({ setUser }) {
                     },
                     data: userDetails,
                 })
-                    .then((data) => {
-                        console.log(data.data);
-                        setUser(data.data);
-                        localStorage.setItem("data", JSON.stringify(data.data));
+                    .then((res) => {
+                        // console.log(res.data);
+                        // setUser(res.data);
+                        localStorage.setItem("data", JSON.stringify(res.data));
+                        if (res.data.success) {
+                            navigate("/");
+                        } else {
+                            // TODO: Handle error when login not successfull
+                        }
                     })
                     .catch((error) => console.log(error));
             };
@@ -82,7 +88,6 @@ export default function ({ setUser }) {
     };
 
     const signUpUser = () => {
-        console.log(userDetails);
         if (userDetails.name.length == 0) {
             setErrorMessage("Full Name can't be empty");
         }
@@ -121,10 +126,15 @@ export default function ({ setUser }) {
                     },
                     data: userDetails,
                 })
-                    .then((data) => {
-                        console.log(data.data);
-                        setUser(data.data);
-                        localStorage.setItem("data", JSON.stringify(data.data));
+                    .then((res) => {
+                        // console.log(res.data);
+                        // setUser(res.data);
+                        localStorage.setItem("data", JSON.stringify(res.data));
+                        if (res.data.success) {
+                            navigate("/");
+                        } else {
+                            // TODO: Handle error when SionUp not successfull
+                        }
                     })
                     .catch((error) => console.log(error));
             };

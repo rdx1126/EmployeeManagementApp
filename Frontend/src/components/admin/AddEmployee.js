@@ -9,12 +9,11 @@ function AddEmployee({ setAddOpen }) {
         email: "",
         name: "",
         password: "",
-        contactNumber: 9876543210,
+        contactNumber: "",
         joiningDate: new Date(),
         department: "",
     });
     let [errorMessage, setErrorMessage] = useState("No Error");
-    let [authToken, setAuthToken] = useState("");
 
     const handleName = (e) => {
         if (empDetails.name.length > 0) setErrorMessage("No Error");
@@ -71,7 +70,7 @@ function AddEmployee({ setAddOpen }) {
             empDetails.password.length >= 8 &&
             errorMessage == "No Error"
         ) {
-            console.log("if ke andar"+ empDetails.contactNumber);
+            console.log("if ke andar" + empDetails.contactNumber);
             const addEmployee = async () => {
                 let baseURL = "http://localhost:5000/api/auth/";
                 await axios({
@@ -79,8 +78,7 @@ function AddEmployee({ setAddOpen }) {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "auth-token":
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM0MWM5ZjkxODAxZDkwNTcxNGQ3NmY1Iiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY2NTM0MDc5MX0.RYbpnb5K6qOvZs1kD8_9RVmhUXPfSWhfqOZwjJhy6XQ",
+                        "auth-token": localStorage.getItem("data").authToken,
                     },
                     data: empDetails,
                 })

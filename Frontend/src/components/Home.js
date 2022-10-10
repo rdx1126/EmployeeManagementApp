@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <>
             {localStorage.getItem("data") ? (
-                JSON.parse(localStorage.getItem("data")).role == "admin" ? (
+                JSON.parse(localStorage.getItem("data")).role === "admin" ? (
                     <AdminDashboard />
                 ) : (
                     <EmployeeDashboard />

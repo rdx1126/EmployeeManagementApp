@@ -48,8 +48,7 @@ function AddTask({ setAddOpen }) {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token":
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM0MmE5NjhmMWEzMDUyNDMxMzI0Zjg5Iiwicm9sZSI6ImVtcGxveWVlIn0sImlhdCI6MTY2NTMzNjUxMH0.prY-IIM7A9nKuBHbcAV4ZL_gJ_Mt4ZCJY3uaGKA82Fw",
+                    "auth-token": localStorage.getItem("data").authToken,
                 },
                 data: taskDetails,
             })
