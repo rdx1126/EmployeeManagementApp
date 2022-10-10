@@ -41,14 +41,15 @@ function AddTask({ setAddOpen }) {
         setAddOpen(false);
     };
     const handleAddTask = () => {
-        const addEmployee = async () => {
+        const addTask = async () => {
             let baseURL = "http://localhost:5000/api/task/";
             await axios({
                 url: `${baseURL}addtask`,
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem("data").authToken,
+                    "auth-token": JSON.parse(localStorage.getItem("data"))
+                        .authToken,
                 },
                 data: taskDetails,
             })
@@ -61,7 +62,7 @@ function AddTask({ setAddOpen }) {
                     setAddOpen(false);
                 });
         };
-        addEmployee();
+        addTask();
     };
 
     return (

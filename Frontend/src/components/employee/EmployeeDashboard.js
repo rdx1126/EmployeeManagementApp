@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import NavBar from "../NavBar";
 import AddTask from "./AddTask";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import TaskContext from "../../context/tasks/TaskContext";
 
 export default function EmployeeDashboard() {
     const [isAddOpen, setAddOpen] = useState(false);
+    const { task, getTasks } = useContext(TaskContext);
+
+    useEffect(() => {
+        getTasks();
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>

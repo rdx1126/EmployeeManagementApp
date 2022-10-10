@@ -78,7 +78,8 @@ function AddEmployee({ setAddOpen }) {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "auth-token": localStorage.getItem("data").authToken,
+                        "auth-token": JSON.parse(localStorage.getItem("data"))
+                            .authToken,
                     },
                     data: empDetails,
                 })
