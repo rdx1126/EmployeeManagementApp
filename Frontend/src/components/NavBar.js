@@ -4,9 +4,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-// import MenuIcon from '@mui/icons-material/Menu';
-import AddTask from "./employee/AddTask";
-import AddEmployee from "./admin/AddEmployee";
 
 export default function NavBar(props) {
     const handleAddButtonClick = () => {
@@ -15,12 +12,26 @@ export default function NavBar(props) {
     };
 
     return (
-        <Box className="boxstyles" sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" style={{ backgroundColor: "#293462" }}>
-                <Toolbar style={{ color: "white" }}>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar
+                position="fixed"
+                style={{
+                    backgroundColor: "#293462",
+                    height: "10%",
+                }}
+            >
+                <Toolbar
+                    style={{
+                        color: "white",
+                        height: "100%",
+                    }}
+                >
                     <Typography
                         variant="h5"
                         component="div"
+                        style={{
+                            fontSize: "1.5vw",
+                        }}
                         sx={{ flexGrow: 1, color: "white" }}
                     >
                         {`${props.title}`}
