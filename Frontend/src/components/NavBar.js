@@ -30,7 +30,7 @@ export default function NavBar(props) {
                         variant="h5"
                         component="div"
                         style={{
-                            fontSize: "1.5vw",
+                            fontSize: "100%",
                         }}
                         sx={{ flexGrow: 1, color: "white" }}
                     >
@@ -41,7 +41,7 @@ export default function NavBar(props) {
                         <Button
                             onClick={handleAddButtonClick}
                             style={{
-                                postion: "fixed",
+                                // postion: "fixed",
                                 cursor: "pointer",
                                 color: "white",
                                 backgroundColor: "#00B4D8",
@@ -52,10 +52,11 @@ export default function NavBar(props) {
                         </Button>
                         <Button
                             style={{
-                                postion: "fixed",
-                                fontSize: "1vw",
+                                // postion: "fixed",
+                                fontSize: "80%",
                                 backgroundColor: "#00B4D8",
                                 color: "white",
+
                             }}
                         >
                             LOGOUT

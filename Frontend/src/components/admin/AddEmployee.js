@@ -45,6 +45,15 @@ function AddEmployee({ setAddOpen }) {
         if (empDetails.name.length == 0) {
             setErrorMessage("Name can't be empty");
         }
+        if (empDetails.department.length == 0) {
+            setErrorMessage("Department can't be empty");
+        }
+        if (
+            empDetails.contactNumber.length < 10 ||
+            empDetails.contactNumber.length == 0
+        ) {
+            setErrorMessage("Please Enter a Valid Contact Number");
+        }
         if (empDetails.email.length == 0) {
             setErrorMessage("Email address can't be empty");
         } else if (!validator.isEmail(empDetails.email)) {
@@ -56,10 +65,13 @@ function AddEmployee({ setAddOpen }) {
         console.log(errorMessage);
         if (
             empDetails.name.length > 0 &&
+            empDetails.department.length > 0 &&
+            empDetails.contactNumber.toString().length == 10 &&
             validator.isEmail(empDetails.email) &&
             empDetails.password.length >= 8 &&
             errorMessage == "No Error"
         ) {
+            console.log("if ke andar"+ empDetails.contactNumber);
             const addEmployee = async () => {
                 let baseURL = "http://localhost:5000/api/auth/";
                 await axios({
